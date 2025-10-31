@@ -51,3 +51,5 @@ g++ visualizer.cpp -lmgl -lmgl-fltk -o visualizer
 python3 signal_generator.py(ubuntu)
 python signal_generator.py(windows)
 
+________
+
