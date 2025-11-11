@@ -6,7 +6,7 @@
 #include <iostream>
 using namespace std;
 
-// ------------------- Draw Callback -------------------
+// --- Draw Callback ---
 int draw_graph(HMGL gr_handle, void *param)
 {
     vector<pair<double, double>> *data = (vector<pair<double, double>> *)param;
@@ -27,11 +27,7 @@ int draw_graph(HMGL gr_handle, void *param)
         encFile.close();
     }
 
-    // // --- Dynamic title with encoding type ---
-    // std::string fullTitle = "Digital Signal Encoding Visualization — " + encodingType;
-    // gr.SetFontSize(0.1);  // ↓ smaller title size
-    // gr.Title(fullTitle.c_str(), "", 0);  // center-aligned
-
+  
     // --- Dynamic title with encoding type ---
     std::string fullTitle = "Digital Signal Encoding Visualization — " + encodingType;
 

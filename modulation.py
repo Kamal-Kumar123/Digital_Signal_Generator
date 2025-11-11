@@ -36,5 +36,6 @@ def delta_modulate(stype, freq, amp, samples):
         else:
             bits += '0'
             y[i] = y[i-1] - delta
+            
     return bits
 

@@ -5,16 +5,47 @@ import math
 from modulation import pcm_encode, delta_modulate
 from encoding import line_encode, apply_scrambling
 from decoding import line_decode
-# Utility: Longest Palindrome
+
+# Utility: Longest Palindrome (Optimized O(n) Manacher’s Algorithm)
 def find_longest_palindrome(s):
-    n = len(s)
-    longest = ""
+    if not s:
+        return ""
+
+    # Preprocess string by inserting separators (#)
+    processed = "#" + "#".join(s) + "#"
+    n = len(processed)
+
+    P = [0] * n
+    center = 0
+    right = 0
+    max_len = 0
+    center_index = 0
+
     for i in range(n):
-        for j in range(i, n):
-            sub = s[i:j+1]
-            if sub == sub[::-1] and len(sub) > len(longest):
-                longest = sub
-    return longest
+        mirror = 2 * center - i
+
+        if i < right:
+            P[i] = min(right - i, P[mirror])
+
+        # Expand outward around center i
+        while (i + P[i] + 1 < n and
+               i - P[i] - 1 >= 0 and
+               processed[i + P[i] + 1] == processed[i - P[i] - 1]):
+            P[i] += 1
+
+        # If palindrome extends beyond right boundary, update center
+        if i + P[i] > right:
+            center = i
+            right = i + P[i]
+
+        # Track the longest palindrome found
+        if P[i] > max_len:
+            max_len = P[i]
+            center_index = i
+
+    # Convert processed indices back to original string
+    start = (center_index - max_len) // 2
+    return s[start : start + max_len]
 
 
 # Signal-Generators (Analog)

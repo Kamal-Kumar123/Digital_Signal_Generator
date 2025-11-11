@@ -1,4 +1,3 @@
-
 # Line Encoding + Scrambling
 def line_encode(bits, scheme, scrambling=None):
     scheme = scheme.lower()
